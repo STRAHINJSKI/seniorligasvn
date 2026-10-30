@@ -773,8 +773,8 @@ function renderFixtures(){
 function renderStats(){
   if (!PLAYER_OF_MONTH){
     $("#potm").classList.add("soon");
-    $("#potm").innerHTML = `<div class="hd"><span class="mono"><span class="dot"></span>Igrač meseca</span><span class="tag">SVN7 vaučer</span></div>
-      <div style="grid-column:1/-1"><h3>Bira se od decembra</h3><p style="color:var(--soft);margin:12px 0 0;max-width:44ch">Svakog meseca biramo najboljeg igrača lige. Na kraju sezone najbolji igrač dobija SVN7 vaučer i trofej.</p></div>`;
+    $("#potm").innerHTML = `<div class="hd"><span class="mono"><span class="dot"></span>Najbolji igrač lige</span><span class="tag">SVN7 vaučer</span></div>
+      <div style="grid-column:1/-1"><h3>Bira se na kraju lige</h3><p style="color:var(--soft);margin:12px 0 0;max-width:44ch">Na kraju sezone biramo najboljeg igrača lige. Nagrada je SVN7 vaučer i trofej.</p></div>`;
   }
   if (!PLAYER_OF_ROUND){
     $("#pokr").innerHTML = `<h3>Igrač kola <span class="tag">Kostobrani</span></h3><div class="soon"><p>Posle svakog kola biramo igrača kola. Nagrada su kostobrani sa njegovom slikom.</p></div>`;
