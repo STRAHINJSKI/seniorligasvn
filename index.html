@@ -160,7 +160,7 @@ section.block{padding-block:clamp(64px,9vw,120px)}
 .post.lead h3{font-size:clamp(32px,3.6vw,50px)}
 .r1{display:grid;gap:6px;margin-bottom:18px;padding-right:min(20%,110px)}
 .r1-h{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--line, rgba(255,255,255,.08))}
-.r1-row{display:grid;grid-template-columns:78px 1fr 26px 1fr;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-weight:600;font-size:14px}
+.r1-row{display:grid;grid-template-columns:112px 1fr 26px 1fr;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-weight:600;font-size:14px}
 .r1-d{color:var(--muted);font-size:11px;letter-spacing:.08em;white-space:nowrap}
 .r1-t{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;text-align:right}
 .r1-t.a{justify-content:flex-start;text-align:left}
@@ -508,7 +508,7 @@ const LEAGUE = {
     { name: "Laza Jokić",    phone: "061/234-66-90" },
     { name: "Fića Bajović",  phone: "065/274-02-28" },
   ],
-  kickoffTimes: [],                              // npr. ["18:00","19:00","20:00"] kad se zna satnica
+  kickoffTimes: ["18:00","19:00","20:00"],       // subota i nedelja: 1. utakmica 18h, 2. 19h, 3. 20h
 };
 
 // Natpis od LED tačaka u vrhu stranice.
@@ -836,9 +836,9 @@ function renderNews(){
   const [lead, ...rest] = NEWS;
   const tById = id => TEAMS.find(t => t.id === id);
   const dayName = d => ["Ned","Pon","Uto","Sre","Čet","Pet","Sub"][new Date(d).getDay()] + " " + d.slice(8,10) + "." + d.slice(5,7) + ".";
-  const r1 = (!DEMO && SCHEDULE[0]) ? `<div class="r1"><div class="r1-h"><span class="mono">1. kolo</span><span class="mono">Balon sala Šumadija</span></div>${SCHEDULE[0].map(([h,a,d]) => {
+  const r1 = (!DEMO && SCHEDULE[0]) ? `<div class="r1"><div class="r1-h"><span class="mono">1. kolo</span><span class="mono">Balon sala Šumadija</span></div>${SCHEDULE[0].map(([h,a,d],i) => {
       const H = tById(h), A = tById(a); if (!H || !A) return "";
-      return `<div class="r1-row"><span class="r1-d mono">${dayName(d)}</span><span class="r1-t">${H.name}${badge(H)}</span><span class="r1-vs">vs</span><span class="r1-t a">${badge(A)}${A.name}</span></div>`;
+      return `<div class="r1-row"><span class="r1-d mono">${dayName(d)} ${LEAGUE.kickoffTimes[i%3]||""}</span><span class="r1-t">${H.name}${badge(H)}</span><span class="r1-vs">vs</span><span class="r1-t a">${badge(A)}${A.name}</span></div>`;
     }).join("")}</div>` : "";
   const card = (n, cls="") => `<article class="card post ${cls}">${cls ? `<img class="lead-logo" alt="" src="${LOGO}">${r1}` : ""}
     <div class="m"><span class="tag">${n.tag}</span><span class="mono">${n.date}</span></div><h3>${n.title}</h3><p>${n.text}</p></article>`;
